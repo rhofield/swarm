@@ -1,0 +1,138 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.chat-container {
+    display: flex;
+    height: calc(100vh - 40px);
+    /* Full height minus padding */
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.api-responses,
+.user-chat {
+    flex: 1;
+    /* Each takes half the width */
+    padding: 20px;
+    overflow-y: auto;
+    /* Add scrollbars if content overflows */
+    display: flex;
+    flex-direction: column;
+}
+
+.api-responses {
+    border-right: 1px solid #ccc;
+}
+
+.user-chat {
+    /* Input area will stick to the bottom due to flex */
+}
+
+h2 {
+    text-align: center;
+    margin-top: 0;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    flex-shrink: 0;
+    /* Prevent headers from shrinking */
+}
+
+#api-messages,
+#user-messages {
+    flex-grow: 1;
+    /* Allow message areas to grow */
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style for individual messages */
+.message {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    max-width: 80%;
+    /* Slightly wider max width */
+    word-wrap: break-word;
+}
+
+.user-message {
+    background-color: #dcf8c6;
+    align-self: flex-end;
+    /* Align user messages to the right */
+    margin-left: auto;
+    /* Push to the right */
+}
+
+.api-message {
+    background-color: #e9e9eb;
+    /* Lighter grey */
+    align-self: flex-start;
+    /* Align API messages to the left */
+    margin-right: auto;
+    /* Push to the left */
+}
+
+.input-area {
+    display: flex;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    margin-top: auto;
+    /* Stick to the bottom */
+    flex-shrink: 0;
+    /* Prevent input area from shrinking */
+}
+
+#message-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    /* Rounded input */
+    margin-right: 10px;
+}
+
+#send-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    /* Blue send button */
+    color: white;
+    border-radius: 20px;
+    /* Rounded button */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#send-button:hover {
+    background-color: #0056b3;
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-left-color: #09f;
+    animation: spin 1s ease infinite;
+    margin: 20px auto;
+    /* Center the spinner */
+    display: none;
+    /* Hidden by default */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="chat-container">
+        <div class="api-responses">
+            <h2>University Support</h2>
+            <div id="spinner" class="spinner"></div>
+            <div id="api-messages">
+                <!-- API messages will appear here -->
+                <span class="agent-name"></span>
+            </div>
+        </div>
+        <div class="user-chat">
+            <div id="user-messages">
+                <!-- User messages will appear here -->
+            </div>
+            <div class="input-area">
+                <input type="text" id="message-input" placeholder="Type your message...">
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
