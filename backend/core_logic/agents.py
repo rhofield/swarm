@@ -1,7 +1,11 @@
 from swarm import Swarm, Agent
 
-client = Swarm()
 
+'''
+This is not a very modular approach, but due to the simplicity of the project, only 3 agents, it's a fine approach and making it more modular would over engineer the project.
+'''
+
+client = Swarm()
 
 def transfer_to_course_advisor():
     return course_advisor

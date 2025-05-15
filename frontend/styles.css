@@ -7,6 +7,8 @@ body {
 
 .chat-container {
     display: flex;
+    flex-direction: column;
+    /* Arrange children (h2, spinner, chat-messages, input-area) vertically */
     height: calc(100vh - 40px);
     /* Full height minus padding */
     border: 1px solid #ccc;
@@ -14,42 +16,28 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.api-responses,
-.user-chat {
-    flex: 1;
-    /* Each takes half the width */
-    padding: 20px;
-    overflow-y: auto;
-    /* Add scrollbars if content overflows */
-    display: flex;
-    flex-direction: column;
-}
-
-.api-responses {
-    border-right: 1px solid #ccc;
-}
-
-.user-chat {
-    /* Input area will stick to the bottom due to flex */
-}
-
 h2 {
     text-align: center;
     margin-top: 0;
+    padding: 20px 20px 10px 20px;
+    /* Added horizontal padding to match other elements */
     color: #333;
     border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
     flex-shrink: 0;
     /* Prevent headers from shrinking */
 }
 
-#api-messages,
-#user-messages {
+/* Combined #api-messages and #user-messages into #chat-messages */
+#chat-messages {
     flex-grow: 1;
-    /* Allow message areas to grow */
-    margin-bottom: 15px;
+    /* Allow message area to grow */
+    padding: 0 20px;
+    /* Add horizontal padding, vertical padding handled by messages */
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
+    margin-bottom: 15px;
+    /* Retained from original #user-messages / #api-messages */
 }
 
 /* Style for individual messages */
@@ -60,6 +48,8 @@ h2 {
     max-width: 80%;
     /* Slightly wider max width */
     word-wrap: break-word;
+    box-sizing: border-box;
+    /* Ensure padding doesn't make it wider than max-width */
 }
 
 .user-message {
@@ -82,9 +72,9 @@ h2 {
 .input-area {
     display: flex;
     border-top: 1px solid #eee;
-    padding-top: 15px;
-    margin-top: auto;
-    /* Stick to the bottom */
+    padding: 15px 20px 20px 20px;
+    /* Added horizontal padding and adjusted bottom */
+    /* margin-top: auto; /* This might not be needed if chat-messages grows */
     flex-shrink: 0;
     /* Prevent input area from shrinking */
 }
@@ -122,9 +112,8 @@ h2 {
     border-left-color: #09f;
     animation: spin 1s ease infinite;
     margin: 20px auto;
-    /* Center the spinner */
     display: none;
-    /* Hidden by default */
+    flex-shrink: 0;
 }
 
 @keyframes spin {

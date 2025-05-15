@@ -10,22 +10,17 @@
 
 <body>
     <div class="chat-container">
-        <div class="api-responses">
-            <h2>University Support</h2>
-            <div id="spinner" class="spinner"></div>
-            <div id="api-messages">
-                <!-- API messages will appear here -->
-                <span class="agent-name"></span>
-            </div>
+        <h2>University Support</h2>
+        <div id="chat-messages">
+            <!-- API and User messages will appear here -->
+            <!-- The existing span.agent-name might need to be handled by script.js -->
         </div>
-        <div class="user-chat">
-            <div id="user-messages">
-                <!-- User messages will appear here -->
-            </div>
-            <div class="input-area">
-                <input type="text" id="message-input" placeholder="Type your message...">
-                <button id="send-button">Send</button>
-            </div>
+
+        <div id="spinner" class="spinner"></div>
+
+        <div class="input-area">
+            <input type="text" id="message-input" placeholder="Type your message...">
+            <button id="send-button">Send</button>
         </div>
     </div>
 

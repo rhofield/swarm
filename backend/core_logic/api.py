@@ -2,9 +2,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 import json
-from datetime import datetime
 from backend.middleware.logic import chat_with_swarm
-from backend.types import ChatResponse
+from backend.core_logic.types import ChatResponse
 
 @csrf_exempt
 @require_http_methods(["POST"])
@@ -21,6 +20,6 @@ def send_message(request):
     except json.JSONDecodeError:
         return JsonResponse({'error': 'Invalid JSON in request body'}, status=400)
     except Exception as e:
-        # Log the error for debugging
+        # We would use a logging framework in a real project
         print(f"An error occurred: {e}") 
         return JsonResponse({'error': 'An unexpected error occurred'}, status=500)

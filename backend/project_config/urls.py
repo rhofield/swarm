@@ -1,6 +1,6 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from backend.core_logic.api import send_message
 
 urlpatterns = [
-    path('', include('backend.urls')), # Include URLs from the backend app
-]
+    path('api/send_message', send_message, name='send_message'),
+] 

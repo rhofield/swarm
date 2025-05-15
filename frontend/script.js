@@ -1,8 +1,11 @@
 const messageInput = document.getElementById('message-input');
 const sendButton = document.getElementById('send-button');
-const userMessagesDiv = document.getElementById('user-messages');
-const apiMessagesDiv = document.getElementById('api-messages');
+const chatMessagesDiv = document.getElementById('chat-messages');
 const spinner = document.getElementById('spinner');
+
+if (!messageInput || !sendButton || !chatMessagesDiv || !spinner) {
+    throw new Error("Essential DOM elements not found. Check your HTML structure.");
+}
 
 const BASE_URL = 'http://127.0.0.1:8000';
 let conversationHistory = [];
@@ -10,21 +13,21 @@ let conversationHistory = [];
 function addMessage(text, sender, agentName) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message');
-    messageDiv.innerHTML = marked.parse(text);
 
     if (sender === 'user') {
         messageDiv.classList.add('user-message');
-        userMessagesDiv.appendChild(messageDiv);
-        userMessagesDiv.scrollTop = userMessagesDiv.scrollHeight;
+        messageDiv.innerHTML = marked.parse(text);
     } else {
         messageDiv.classList.add('api-message');
-        const agentNameSpan = document.querySelector('#api-messages .agent-name');
-        if (agentNameSpan && agentName) {
-            agentNameSpan.textContent = agentName + ': ';
+        if (agentName) {
+            messageDiv.innerHTML = marked.parse(`**${agentName}:** ${text}`);
+        } else {
+            messageDiv.innerHTML = marked.parse(text);
         }
-        apiMessagesDiv.appendChild(messageDiv);
-        apiMessagesDiv.scrollTop = apiMessagesDiv.scrollHeight;
     }
+
+    chatMessagesDiv.appendChild(messageDiv);
+    chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
 
     // Add message to history
     const role = sender === 'user' ? 'user' : 'assistant';
@@ -36,7 +39,6 @@ async function sendMessageToApi(message) {
     messageInput.value = '';
     sendButton.disabled = true;
     spinner.style.display = 'block';
-
     try {
         const response = await fetch(`${BASE_URL}/api/send_message`, {
             method: 'POST',
@@ -47,9 +49,6 @@ async function sendMessageToApi(message) {
                 history: conversationHistory
             })
         });
-
-        console.log('response');
-        console.log(response);
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -79,30 +78,9 @@ sendButton.addEventListener('click', () => {
 });
 
 messageInput.addEventListener('keypress', (event) => {
-    // Send message on Enter key press
     if (event.key === 'Enter') {
         sendButton.click();
     }
 });
 
-// Example function to get CSRF token from cookies (if needed for Django)
-/*
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-*/
-
-// Initial focus on the input field
 messageInput.focus(); 
