@@ -1,6 +1,13 @@
 **How to install**<br>
-1. Create virtual environment: python -m venv venv
-2. Install dependencies: pip install -r requirements.txt
+- Create virtual environment: python -m venv venv
+- Install dependencies: pip install -r requirements.txt
+- Add openAi API key. How you do this depends on the system you are running but we want to add it as an environemnt variable
+  - Windows: Search for environment variables,
+    - click environemnt varaible button,
+    - click new under "System variables", Name: OPENAI_API_KEY, value: get from openAi <br>
+  - Mac:
+    - nano ~/.zshrc ,
+    - add this line: export OPENAI_API_KEY="{key from open ai}" <br>
 
 **How to run**<br>
 source venv/bin/activate <br>
